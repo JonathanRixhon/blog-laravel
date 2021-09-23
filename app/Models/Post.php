@@ -10,11 +10,11 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Post
 {
-    public string $title;
     public string $excerpt;
-    public string $date;
+    public string $title;
     public string $slug;
     public string $body;
+    public int $date;
 
     public function __construct($title, $excerpt, $date, $slug, $body)
     {
