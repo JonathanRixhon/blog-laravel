@@ -18,8 +18,9 @@ class Post
 
     static function all()
     {
-        $files=File::files(resource_path("posts"));
-        return $files;
+        $files = File::files(resource_path("posts"));
+        $models = array_map(fn($files) => $files->getContents(), $files);
+        return $models;
     }
 
 
