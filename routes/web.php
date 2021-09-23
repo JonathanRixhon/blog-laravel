@@ -23,12 +23,12 @@ Route::get('/', function () {
 });
 
 Route::get('/posts/{post}', function ($slug) {
-    $post = Post::find($slug);
+    $post = Post::findOrFail($slug);
     $page_title="Le post: {$post->title}";
     return view('post', [
         'post' => $post,
         "page_title"=>$page_title
 
     ]);
-})->where('post', '[A-z0-9_\-]+');
+});
 
