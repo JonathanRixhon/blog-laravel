@@ -1,14 +1,14 @@
-@extends('layout')
+<x-layout>
+    <x-slot name="title">
+        <title>
+            La liste des posts
+        </title>
+    </x-slot>
 
-
-@section("main_title")
-    <title>{{$page_title}}</title>
-@endsection
-
-
-@section('main_content')
-    {!! $post->body !!}
-    <p>
-        <a href="/">⬅ Go back</a>
-    </p>
-@endsection
+    <x-slot name="mainContent">
+        {!! $post->body !!}
+        <p>
+            <a href="/">⬅ Go back</a>
+        </p>
+    </x-slot>
+</x-layout>
