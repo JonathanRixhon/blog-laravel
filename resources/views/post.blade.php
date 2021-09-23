@@ -9,7 +9,7 @@
 </head>
 <body>
     <section>
-        <?= $post; ?>
+        <?= $post->body; ?>
     </section>
 <a href="/">⬅ Go back</a>
 </body>

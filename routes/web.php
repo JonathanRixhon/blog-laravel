@@ -13,17 +13,23 @@ use \App\Models\Post;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
+/*Route::get('/', function () {
     $posts = Post::all();
     return view('posts', ["posts" => $posts]);
-});
+});*/
 
 Route::get('/posts', function () {
     return view('posts');
 });
 
+Route::get('/', function () {
+    $posts=Post::all();
+    return view('posts', ["posts" => $posts]);
+
+});
+
 Route::get('/posts/{post}', function ($slug) {
     $post = Post::find($slug);
     return view('post', ['post' => $post]);
-})->where('post', '[A-z_\-]+');
+})->where('post', '[A-z0-9_\-]+');
 
