@@ -4,6 +4,7 @@ body{
     font-family: "Helvetica Neue",sans-serif;
     max-width: 600px;
     margin: 0 auto;
+    padding-top: 2em;
 }
 article{
 }

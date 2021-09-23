@@ -27,7 +27,7 @@ class Post
 
     public static function all(): Collection
     {
-        return cache()->rememberForever("post.all", function () {
+        return cache()->rememberForever("posts.all", function () {
 
             $files = \Illuminate\Support\Facades\File::files(resource_path('posts'));
 
