@@ -27,20 +27,21 @@ class Post
 
     public static function all(): Collection
     {
-        $files = \Illuminate\Support\Facades\File::files(resource_path('posts'));
+        return cache()->rememberForever("post.all", function () {
 
-        return collect($files)->map(function ($file) {
-            $document = YamlFrontMatter::parseFile($file);
-            return new Post(
-                $document->title,
-                $document->excerpt,
-                $document->date,
-                $document->slug,
-                $document->body()
-            );
+            $files = \Illuminate\Support\Facades\File::files(resource_path('posts'));
+
+            return collect($files)->map(function ($file) {
+                $document = YamlFrontMatter::parseFile($file);
+                return new Post(
+                    $document->title,
+                    $document->excerpt,
+                    $document->date,
+                    $document->slug,
+                    $document->body()
+                );
+            })->sortByDesc("date");
         });
-
-
     }
 
     public static function find($slug)
