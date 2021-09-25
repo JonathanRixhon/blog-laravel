@@ -13,9 +13,11 @@
                 <h2>
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
                 </h2>
+
                 <p>
-                    Publised on: <span>{{$post->date}}</span>
+                    Published on: <span>{{$post->date}}</span>
                 </p>
+                
                 <p>
                     {{$post->excerpt}}
                 </p>

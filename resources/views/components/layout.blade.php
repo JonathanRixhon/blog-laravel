@@ -3,8 +3,8 @@
 <head>
     <link rel="stylesheet" href="/app.css">
     {{$title}}
-
 </head>
 <body>
-    {{$mainContent}}
+{{$mainContent}}
 </body>
+</html>

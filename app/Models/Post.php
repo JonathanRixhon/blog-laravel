@@ -44,6 +44,7 @@ class Post
         });
     }
 
+
     public static function findOrFail($slug)
     {
         $posts = static::all();
@@ -59,5 +60,4 @@ class Post
         $posts = static::all();
         return $posts->firstWhere('slug', $slug);
     }
-
 }

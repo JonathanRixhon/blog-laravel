@@ -17,7 +17,6 @@ use \App\Models\Post;
 Route::get('/', function () {
     $posts = Post::all();
     $page_title="My Blog";
-
     return view('posts', ["posts" => $posts, "page_title"=>$page_title]);
 
 });
