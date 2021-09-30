@@ -7,10 +7,20 @@
     </x-slot>
 
     <x-slot name="mainContent">
-        {!! $post->body !!}
+        <h2>
+            {{ $post->title }}
+
+        </h2>
         <p>
-            <a href="/">⬅ Go back</a>
+            Published on:
+            <time datetime="{{$post->published_at}}">
+                {{$post->published_at->diffForHumans()}}
+            </time>
         </p>
+        <p>
+            {{ $post->body }}
+        </p>
+        <a href="/">⬅ Go back</a>
     </x-slot>
 
 </x-layout>

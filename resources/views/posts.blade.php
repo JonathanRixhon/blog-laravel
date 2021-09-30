@@ -13,11 +13,13 @@
                 <h2>
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
                 </h2>
-
                 <p>
-                    Published on: <span>{{$post->date}}</span>
+                    Published on:
+                    <time datetime="{{$post->published_at}}">
+                        {{$post->published_at->diffForHumans()}}
+                    </time>
                 </p>
-                
+
                 <p>
                     {{$post->excerpt}}
                 </p>
