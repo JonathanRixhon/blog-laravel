@@ -7,12 +7,14 @@
     </x-slot>
 
     <x-slot name="mainContent">
-        <h1>Hello World</h1>
-        @foreach ($posts as $post)
+        <h2>
+            {{ $category->name }}
+        </h2>
+        @forelse($category->posts as $post)
             <article>
-                <h2>
+                <h3>
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
-                </h2>
+                </h3>
 
                 <p>
                     Published on:
@@ -25,12 +27,11 @@
                     {{$post->excerpt}}
                 </p>
 
-                <p>
-                    <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a>
-                </p>
             </article>
-        @endforeach
+        @empty
+            <p>Il n'y a pas de posts dans la catégorie: {{ strtolower($category->name) }}</p>
+        @endforelse
+        <a href="/categories">⬅ Go back</a>
     </x-slot>
 
 </x-layout>
-

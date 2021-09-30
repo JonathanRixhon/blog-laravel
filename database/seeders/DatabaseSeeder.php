@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             'excerpt' => 'description du post',
             'slug' => 'mon-post-1',
             'published_at' => now(),
-            'category_id' => Category::where('slug', 'family')->first()->id,
+            'category_id' => Category::where('slug', 'work')->first()->id,
         ]);
         Post::create([
             'title' => 'Mon Deuxième post',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'excerpt' => 'description du post',
             'slug' => 'mon-post-2',
             'published_at' => now(),
-            'category_id' => Category::where('slug', 'family')->first()->id,
+            'category_id' => Category::where('slug', 'home')->first()->id,
 
         ]);
         Post::create([
@@ -70,7 +70,7 @@ class DatabaseSeeder extends Seeder
             'excerpt' => 'description du post',
             'slug' => 'mon-post-5',
             'published_at' => now(),
-            'category_id' => Category::where('slug', 'family')->first()->id,
+            'category_id' => Category::where('slug', 'home')->first()->id,
         ]);
         Post::create([
             'title' => 'Un post sur la famille',

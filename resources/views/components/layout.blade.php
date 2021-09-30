@@ -5,6 +5,16 @@
     {{$title}}
 </head>
 <body>
+<nav>
+    <ul>
+        <li>
+            <a href="/categories">Catégories</a>
+        </li>
+        <li>
+            <a href="/">Posts</a>
+        </li>
+    </ul>
+</nav>
 {{$mainContent}}
 </body>
 </html>

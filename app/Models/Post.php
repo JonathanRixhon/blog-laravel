@@ -29,13 +29,22 @@ use
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $category_id
+ * @property-read \App\Models\Category $category
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereCategoryId($value)
  */
 class Post extends Model
 {
-    protected $dates=[
+    use HasFactory;
+
+    protected $dates = [
         "published_at"
     ];
-    //protected $fillable=[];
-    protected $guarded=[];
-    use HasFactory;
+    protected $guarded = [];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
