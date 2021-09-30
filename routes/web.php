@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use \App\Models\Post;
 
@@ -23,26 +22,5 @@ Route::get('/', function () {
 });
 
 Route::get('/posts/{post:slug}', function (Post $post) {
-
-    //$post = Post::where('slug',$slug)->firstOrFail();
-
-    $page_title = "Le post: {$post->title}";
-
-    return view('post', [
-        'post' => $post,
-        "page_title" => $page_title
-
-    ]);
+    return view('post', compact(['post']));
 });
-
-/*
-Route::get('/n', function () {
-    $user = new User();
-    $user->name = 'Jonathan';
-    $user->email = 'jonathan.test@hotmail.com';
-    $user->password = Hash::make('jonathan');
-    //$user->save();
-    return User::findOrFail(1)->name;
-});
- */
-

@@ -1,5 +1,0 @@
-$excerpt
-$title
-$slug
-$body
-$date

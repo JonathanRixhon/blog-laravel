@@ -9,7 +9,6 @@
     <x-slot name="mainContent">
         <h2>
             {{ $post->title }}
-
         </h2>
         <p>
             Published on:
