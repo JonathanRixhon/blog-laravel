@@ -2,21 +2,21 @@
 
     <x-slot name="title">
         <title>
-            La liste des posts
+            La liste des utilisateurs
         </title>
     </x-slot>
 
     <x-slot name="mainContent">
         <h2>
-            {{ $category->name }}
+            {{ $user->name }}
         </h2>
-        @forelse($category->posts as $post)
+        @forelse($user->posts as $post)
             <article>
                 <h3>
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
                 </h3>
                 <p>
-                    Created by: <b>{{$post->user->name}}</b>
+                    Created by: <b>{{$user->name}}</b>
                 </p>
                 <p>
                     Published on:
@@ -24,16 +24,19 @@
                         {{$post->published_at->diffForHumans()}}
                     </time>
                 </p>
-
                 <p>
                     {{$post->excerpt}}
+                </p>
+                <p>
+                    {{$post->category->name}}
                 </p>
 
             </article>
         @empty
-            <p>Il n'y a pas de posts dans la catégorie: {{ strtolower($category->name) }}</p>
+            <p>{{$user->name}} n'a pas encore écrit de post</p>
         @endforelse
-        <a href="/categories">⬅ Go back</a>
+        <a href="/users">⬅ Go back</a>
     </x-slot>
 
 </x-layout>
+

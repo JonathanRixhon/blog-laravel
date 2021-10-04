@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use \App\Models\Post;
 use \App\Models\Category;
@@ -16,7 +17,7 @@ use \App\Models\Category;
 */
 
 Route::get('/', function () {
-    $posts = Post::with('category')->get();
+    $posts = Post::with('category', 'user')->get();
     $page_title = "My Blog";
 
     return view('posts', ["posts" => $posts, "page_title" => $page_title]);
@@ -28,13 +29,19 @@ Route::get('/posts/{post:slug}', function (Post $post) {
 
 
 Route::get('/categories', function () {
-    \Illuminate\Support\Facades\DB::listen(function($q){
-        logger($q->sql);
-    });
     $categories = Category::all();
     return view('categories', ["categories" => $categories, "page_title" => 'Catégories']);
 });
 
+Route::get('/users', function () {
+    $users = User::all();
+    return view('users', ["users" => $users, "page_title" => 'Utilisateurs']);
+});
+
+Route::get('/users/{user:slug}', function (User $user) {
+    $user->load('posts.category');
+    return view('user', compact(['user']));
+});
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('category', compact(['category']));
 });

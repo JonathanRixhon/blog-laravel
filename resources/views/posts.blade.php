@@ -15,6 +15,10 @@
                 </h2>
 
                 <p>
+                    Created by: <b>{{$post->user->name}}</b>
+                </p>
+
+                <p>
                     Published on:
                     <time datetime="{{$post->published_at}}">
                         {{$post->published_at->diffForHumans()}}

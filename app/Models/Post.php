@@ -47,4 +47,12 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function user()
+    {
+        //Attention, si on avait décidé d'appeler sa fonction author, laravel bug, alors on aurait du mettre
+        //return $this->belongsTo(User::class,'user_id');
+        
+        return $this->belongsTo(User::class);
+    }
+
 }

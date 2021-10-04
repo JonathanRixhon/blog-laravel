@@ -9,6 +9,8 @@
     <ul>
         <li>
             <a href="/categories">Catégories</a>
+        </li>  <li>
+            <a href="/users">Auteurs</a>
         </li>
         <li>
             <a href="/">Posts</a>

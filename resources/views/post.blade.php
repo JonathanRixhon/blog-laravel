@@ -10,12 +10,17 @@
         <h2>
             {{ $post->title }}
         </h2>
-        <p>
-            Published on:
-            <time datetime="{{$post->published_at}}">
-                {{$post->published_at->diffForHumans()}}
-            </time>
-        </p>
+        <div>
+            <p>
+                Created by: <a href="/users/{{$post->user->slug}}">{{$post->user->name}}</a>
+            </p>
+            <p>
+                Published on:
+                <time datetime="{{$post->published_at}}">
+                    {{$post->published_at->diffForHumans()}}
+                </time>
+            </p>
+        </div>
         <p>
             <a href="/categories/{{$post->category->slug}}">{{$post->category->name}}</a>
         </p>
