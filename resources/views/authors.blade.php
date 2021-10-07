@@ -12,11 +12,11 @@
         </h2>
         <ul>
 
-            @foreach ($users as $user)
+            @foreach ($authors as $author)
                 <li>
-                    <a href="/users/{{$user->slug}}">
-                        {{ $user->name }}
-                    </a> - {{$user->posts->count()}}
+                    <a href="/authors/{{$author->slug}}">
+                        {{ $author->name }}
+                    </a> - {{$author->posts->count()}}
                 </li>
             @endforeach
         </ul>

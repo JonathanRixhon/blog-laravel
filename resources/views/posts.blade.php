@@ -7,7 +7,23 @@
     </x-slot>
 
     <x-slot name="mainContent">
-        <h1>Hello World</h1>
+
+        @include('_posts-header')
+
+        <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+            @if($posts->count())
+                <x-post-featured-card :post="$posts->first()"/>
+                <x-posts-grid :posts="$posts" />
+            @endif
+        </main>
+
+    </x-slot>
+
+</x-layout>
+
+
+{{--
+<h1>Hello World</h1>
         @foreach ($posts as $post)
             <article>
                 <h2>
@@ -15,7 +31,7 @@
                 </h2>
 
                 <p>
-                    Created by: <b>{{$post->user->name}}</b>
+                    Created by: <b>{{$post->author->name}}</b>
                 </p>
 
                 <p>
@@ -34,7 +50,4 @@
                 </p>
             </article>
         @endforeach
-    </x-slot>
-
-</x-layout>
-
+--}}

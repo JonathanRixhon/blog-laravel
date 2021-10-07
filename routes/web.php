@@ -17,7 +17,7 @@ use \App\Models\Category;
 */
 
 Route::get('/', function () {
-    $posts = Post::with('category', 'user')->get();
+    $posts = Post::latest('published_at')->with('category', 'author')->get();
     $page_title = "My Blog";
 
     return view('posts', ["posts" => $posts, "page_title" => $page_title]);
@@ -33,14 +33,14 @@ Route::get('/categories', function () {
     return view('categories', ["categories" => $categories, "page_title" => 'Catégories']);
 });
 
-Route::get('/users', function () {
-    $users = User::all();
-    return view('users', ["users" => $users, "page_title" => 'Utilisateurs']);
+Route::get('/authors', function () {
+    $authors = User::all();
+    return view('authors', ["authors" => $authors, "page_title" => 'Utilisateurs']);
 });
 
-Route::get('/users/{user:slug}', function (User $user) {
-    $user->load('posts.category');
-    return view('user', compact(['user']));
+Route::get('/authors/{author:slug}', function (User $author) {
+    $author->load('posts.category');
+    return view('author', compact(['author']));
 });
 Route::get('/categories/{category:slug}', function (Category $category) {
     return view('category', compact(['category']));

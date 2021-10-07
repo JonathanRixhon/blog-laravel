@@ -8,15 +8,15 @@
 
     <x-slot name="mainContent">
         <h2>
-            {{ $user->name }}
+            {{ $author->name }}
         </h2>
-        @forelse($user->posts as $post)
+        @forelse($author->posts as $post)
             <article>
                 <h3>
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
                 </h3>
                 <p>
-                    Created by: <b>{{$user->name}}</b>
+                    Created by: <b>{{$author->name}}</b>
                 </p>
                 <p>
                     Published on:
@@ -33,7 +33,7 @@
 
             </article>
         @empty
-            <p>{{$user->name}} n'a pas encore écrit de post</p>
+            <p>{{$author->name}} n'a pas encore écrit de post</p>
         @endforelse
         <a href="/users">⬅ Go back</a>
     </x-slot>

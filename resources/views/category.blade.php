@@ -16,7 +16,7 @@
                     <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
                 </h3>
                 <p>
-                    Created by: <b>{{$post->user->name}}</b>
+                    Created by: <b>{{$post->author->name}}</b>
                 </p>
                 <p>
                     Published on:

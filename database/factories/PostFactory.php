@@ -24,22 +24,24 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $categoryRand=Category::all()->count();
+        $categoryRand = Category::all()->count();
 
         $data = [
             'title' => $this->faker->sentence(),
-            'body' => $this->faker->paragraph(),
+            'body' => $this->faker->paragraphs(3, true),
             'excerpt' => $this->faker->sentence(),
-            'published_at' => now(),
-            'category_id' => Category::where('id',rand(1,$categoryRand))->first(),
-            'user_id' => User::where('id',rand(1,4))->first(),
+            'published_at' => $this->faker->dateTime,
+            'user_id' => User::where('id', random_int(1, 4))->first(),
         ];
 
-        if (rand(0,100)>98){
-            $data['category_id']=Category::factory();
+        if (random_int(0, 100) > 98) {
+            $data['category_id'] = Category::factory();
+        } else {
+            $data['category_id'] = Category::where('id', random_int(1, $categoryRand))->first();
+
         }
 
-        $data['slug']=Str::slug($data['title']);
+        $data['slug'] = Str::slug($data['title']);
         return $data;
     }
 }
