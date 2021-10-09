@@ -20,7 +20,12 @@ Route::get('/', function () {
     $posts = Post::latest('published_at')->with('category', 'author')->get();
     $page_title = "My Blog";
 
-    return view('posts', ["posts" => $posts, "page_title" => $page_title]);
+    return view('posts', [
+        "posts" => $posts,
+        "page_title" => $page_title,
+        "categories"=>Category::whereHas('posts')->orderBy('name')->get(),
+        "authors"=>User::whereHas('posts')->orderBy('name')->get(),
+    ]);
 });
 
 Route::get('/posts/{post:slug}', function (Post $post) {
@@ -42,6 +47,9 @@ Route::get('/authors/{author:slug}', function (User $author) {
     $author->load('posts.category');
     return view('author', compact(['author']));
 });
+
 Route::get('/categories/{category:slug}', function (Category $category) {
+    $category->load('posts.author');
+
     return view('category', compact(['category']));
 });

@@ -7,33 +7,14 @@
     </x-slot>
 
     <x-slot name="mainContent">
-        <h2>
-            {{ $category->name }}
-        </h2>
-        @forelse($category->posts as $post)
-            <article>
-                <h3>
-                    <a href="/posts/{{$post->slug}}">{{$post->title}}</a>
-                </h3>
-                <p>
-                    Created by: <b>{{$post->author->name}}</b>
-                </p>
-                <p>
-                    Published on:
-                    <time datetime="{{$post->published_at}}">
-                        {{$post->published_at->diffForHumans()}}
-                    </time>
-                </p>
+        {{--@include('_posts-header')--}}
 
-                <p>
-                    {{$post->excerpt}}
-                </p>
-
-            </article>
-        @empty
-            <p>Il n'y a pas de posts dans la catégorie: {{ strtolower($category->name) }}</p>
-        @endforelse
-        <a href="/categories">⬅ Go back</a>
+        <main class="max-w-6xl mx-auto mt-6 lg:mt-20 space-y-6">
+            @if($category->posts->count())
+                <x-post-featured-card :post="$category->posts->first()"/>
+                <x-posts-grid :posts="$category->posts"/>
+            @endif
+        </main>
     </x-slot>
 
 </x-layout>
