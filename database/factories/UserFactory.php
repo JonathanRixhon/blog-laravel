@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class UserFactory extends Factory
 {
@@ -21,11 +22,12 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'name' => $this->faker->name(),
-            'slug' => $this->faker->slug(),
+        $data = [
+            'name' => $this->faker->unique->name(),
             'email' => $this->faker->email(),
             'password' => bcrypt('password'),
         ];
+        $data['slug'] = Str::slug($data['name'].Str::random());
+        return $data;
     }
 }

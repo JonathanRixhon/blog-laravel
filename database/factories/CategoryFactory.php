@@ -23,11 +23,12 @@ class CategoryFactory extends Factory
     public function definition()
     {
         $data=[
-            'name' => $this->faker->word(),
-            'slug' => $this->faker->slug(),
+            'name' => $this->faker->unique()->word(),
+            //'slug' => $this->faker->slug(),
 
         ];
-//        $data['slug']=Str::slug($data['name']);
+
+       $data['slug']=Str::slug($data['name']);
         return $data;
     }
 }

@@ -23,14 +23,14 @@ Route::get('/', function () {
     return view('posts', [
         "posts" => $posts,
         "page_title" => $page_title,
-        "categories"=>Category::whereHas('posts')->orderBy('name')->get(),
-        "authors"=>User::whereHas('posts')->orderBy('name')->get(),
+        "categories" => Category::whereHas('posts')->orderBy('name')->get(),
+        "authors" => User::whereHas('posts')->orderBy('name')->get(),
     ]);
-});
+})->name('home');
 
 Route::get('/posts/{post:slug}', function (Post $post) {
     return view('post', compact(['post']));
-});
+})->name('post');
 
 
 Route::get('/categories', function () {
@@ -45,11 +45,25 @@ Route::get('/authors', function () {
 
 Route::get('/authors/{author:slug}', function (User $author) {
     $author->load('posts.category');
-    return view('author', compact(['author']));
+    $posts = $author->posts;
+    $posts->load('author');
+
+    return view('posts', [
+        "posts" => $posts,
+        "categories" => Category::whereHas('posts')->orderBy('name')->get(),
+        "authors" => User::all()
+    ]);
 });
 
 Route::get('/categories/{category:slug}', function (Category $category) {
     $category->load('posts.author');
+    $posts = $category->posts;
+    $posts->load('category');
 
-    return view('category', compact(['category']));
-});
+    return view('posts', [
+        "posts" => $posts,
+        "categories" => Category::whereHas('posts')->orderBy('name')->get(),
+        "authors" => User::all(),
+        "currentCategory"=>$category
+    ]);
+})->name('single-category');
