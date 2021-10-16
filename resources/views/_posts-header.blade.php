@@ -5,14 +5,14 @@
 
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <div class="relative lg:inline-flex items-center bg-gray-100 rounded-xl">
-        <!--  Category -->
+            <!--  Category -->
             <x-dropdown>
 
                 {{-- Trigger --}}
                 <x-slot name="trigger">
                     <button class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-32 flex lg:inline-flex">
                         {{isset($currentCategory)?  $currentCategory->name : "Categories" }}
-                        <x-svg.down-arrow class=" absolute pointer-events-none" style="right: 12px;" name="arrow"/>
+                        <x-svg.icon class=" absolute pointer-events-none" style="right: 12px;" name="arrow"/>
 
                     </button>
                 </x-slot>
@@ -75,7 +75,7 @@
         </div>
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="#">
-                <input type="text" name="search" placeholder="Find something"
+                <input value="{{request('search') ?? '' }}" type="text" name="search" placeholder="Find something"
                        class="bg-transparent placeholder-black font-semibold text-sm">
             </form>
         </div>

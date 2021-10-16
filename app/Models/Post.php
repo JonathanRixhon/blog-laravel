@@ -37,6 +37,15 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function scopeFilter($query, array $filters)
+    {
+
+        $query->when($filters['search'] ?? false, fn($query, $search) => $query
+            ->where('title', 'like', '%' . $search . '%')
+            ->orWhere('body', 'like', '%' . $search . '%')
+        );
+    }
+
     protected $dates = [
         "published_at"
     ];
@@ -49,10 +58,7 @@ class Post extends Model
 
     public function author()
     {
-        //Attention, si on avait décidé d'appeler sa fonction author, laravel bug, alors on aurait du mettre
-        //return $this->belongsTo(User::class);
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
 
     }
-
 }
