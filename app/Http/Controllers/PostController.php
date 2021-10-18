@@ -14,8 +14,8 @@ class PostController extends Controller
         $page_title = "My Blog";
 
 
-        return view('posts', [
-            "posts" => Post::latest()->filter(request(['search']))->get(),
+        return view('posts.index', [
+            "posts" => Post::latest()->filter(request(['search', 'category','author']))->simplePaginate(6)->withQueryString(),
             "page_title" => $page_title,
             "categories" => Category::whereHas('posts')->orderBy('name')->get(),
             "authors" => User::whereHas('posts')->orderBy('name')->get(),
@@ -24,7 +24,7 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        return view('post', compact(['post']));
-
+        $post->load('category','author');
+        return view('posts.show', compact(['post']));
     }
 }

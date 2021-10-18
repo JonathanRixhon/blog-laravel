@@ -5,37 +5,7 @@
 
     <div class="space-y-2 lg:space-y-0 lg:space-x-4 mt-4">
         <div class="relative lg:inline-flex items-center bg-gray-100 rounded-xl">
-            <!--  Category -->
-            <x-dropdown>
-
-                {{-- Trigger --}}
-                <x-slot name="trigger">
-                    <button class="py-2 pl-3 pr-9 text-sm font-semibold w-full lg:w-32 flex lg:inline-flex">
-                        {{isset($currentCategory)?  $currentCategory->name : "Categories" }}
-                        <x-svg.icon class=" absolute pointer-events-none" style="right: 12px;" name="arrow"/>
-
-                    </button>
-                </x-slot>
-
-                {{-- Items / Entries --}}
-                <x-slot name="entries">
-                    <x-dropdown-item
-                        :href="URL::to('/')"
-                        :active="request()->routeIs('home')"
-                    >
-                        All posts
-                    </x-dropdown-item>
-                    @foreach($categories as $category)
-                        <x-dropdown-item
-                            href="{{URL::to('/')}}/categories/{{$category->slug}}"
-                            :active="isset($currentCategory) && $currentCategory->is($category)"
-                            {{--:active="request()->is('/categories/'.$category->slug)"--}}
-                        >
-                            {{ucwords($category->name)}}
-                        </x-dropdown-item>
-                    @endforeach
-                </x-slot>
-            </x-dropdown>
+            <x-category-dropdown />
             {{--
                 <select class="flex-1 appearance-none bg-transparent py-2 pl-3 pr-9 text-sm font-semibold">
                     <option value="category" disabled selected>Category
@@ -74,7 +44,10 @@
 
         </div>
         <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
-            <form method="GET" action="#">
+            <form method="GET" action="/">
+                @if(request('category'))
+                    <input type="hidden" name='category'value="{{request('category')}}">
+                @endif
                 <input value="{{request('search') ?? '' }}" type="text" name="search" placeholder="Find something"
                        class="bg-transparent placeholder-black font-semibold text-sm">
             </form>

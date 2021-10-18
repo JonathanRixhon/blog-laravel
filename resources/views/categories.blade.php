@@ -7,7 +7,7 @@
     </x-slot>
 
     <x-slot name="mainContent">
-        @include('_posts-header')
+        @include('posts._header')
 
         <main>
             <ul>
