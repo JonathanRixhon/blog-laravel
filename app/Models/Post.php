@@ -54,11 +54,8 @@ class Post extends Model
 
         $query->when($filters['author'] ?? false, fn($query, $author) => $query
             ->whereHas('author', fn($query) => $query
-                ->where('slug', $author)
+                ->where('username', $author)
             )
-
-
-        /*->whereExists(fn($query) => $query->from('categories')->whereColumn('categories.id', 'posts.category_id')->where('categories.slug', $category))*/
         );
 
 

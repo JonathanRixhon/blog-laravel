@@ -6,20 +6,8 @@
                     @csrf
 
                     <h1 class="text-center font-bold text-xl">
-                        Register
+                        Log in
                     </h1>
-
-                    <div class="mb-6">
-                        <label for="name" class="block mb-2 uppercase font-bold text-xs text-gray-700">
-                            Name
-                        </label>
-                        <input value="{{old('name')}}" class="border rounded border-gray-400 p-2 w-full" type="text"
-                               id="name" name="name">
-
-                        <x-error-message field="name"/>
-
-
-                    </div>
 
                     <div class="mb-6">
                         <label for="username" class="block mb-2 uppercase font-bold text-xs text-gray-700">

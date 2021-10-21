@@ -20,7 +20,7 @@
                         <img src="/images/lary-avatar.svg" alt="Lary avatar">
                         <div class="ml-3 text-left">
                             <h5 class="font-bold">
-                                <a href="/?author={{$post->author->slug}}">
+                                <a href="/?author={{$post->author->username}}">
                                     {{$post->author->name}}
                                 </a>
                             </h5>
@@ -70,7 +70,7 @@
 {{--        </h2>--}}
 {{--        <div>--}}
 {{--            <p>--}}
-{{--                Created by: <a href="/authors/{{$post->author->slug}}">{{$post->author->name}}</a>--}}
+{{--                Created by: <a href="/authors/{{$post->author->username}}">{{$post->author->name}}</a>--}}
 {{--            </p>--}}
 {{--            <p>--}}
 {{--                Published on:--}}

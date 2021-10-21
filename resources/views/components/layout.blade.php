@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
 <title>Laravel From Scratch Blog</title>
@@ -15,10 +14,24 @@
             </a>
         </div>
 
-        <div class="mt-8 md:mt-0">
-            <a href="/" class="text-xs font-bold uppercase">Home Page</a>
+        <div class="mt-8 md:mt-0 flex items-center">
 
-            <a href="/register" class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
+        @auth()
+                <p class="inline-block text-xs uppercase font-bold">Welcome <b>{{auth()->user()->name}}</b></p>
+                <form action="/logout" method="POST" class="ml-4">
+                    @csrf
+                    <button type="submit" class="text-xs uppercase">Logout</button>
+                </form>
+            @else
+                <p>
+                    <a href="/register" class="text-xs font-bold uppercase">Register</a>
+
+                    <a href="/login" class="text-xs font-bold uppercase">Login</a>
+                </p>
+
+            @endguest
+            <a href="/"
+               class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                 Subscribe for Updates
             </a>
         </div>
@@ -52,5 +65,10 @@
         </div>
     </footer>
 </section>
+
+@if(session()->has('success'))
+    <x-flash-message message="{{session('success')}}"/>
+@endif
+
 </body>
 </html>
