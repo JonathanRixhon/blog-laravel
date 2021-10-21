@@ -17,10 +17,10 @@
         <div class="mt-8 md:mt-0 flex items-center">
 
         @auth()
-                <p class="inline-block text-xs uppercase font-bold">Welcome <b>{{auth()->user()->name}}</b></p>
-                <form action="/logout" method="POST" class="ml-4">
+                <p class="text-xs font-bold uppercase">Welcome <b>{{auth()->user()->name}}</b></p>
+                <form action="/logout" method="POST" class="ml-4 p-0 leading-none">
                     @csrf
-                    <button type="submit" class="text-xs uppercase">Logout</button>
+                    <button type="submit" class="text-xs font-bold uppercase p-0 ">Logout</button>
                 </form>
             @else
                 <p>

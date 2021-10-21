@@ -26,9 +26,18 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
-    public function posts(){
+
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comment::class, Post::class);
+    }
+
 
 }

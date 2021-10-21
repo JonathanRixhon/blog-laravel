@@ -74,10 +74,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //Relations
+
     public function posts()
     {
         return $this->hasMany(Post::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    //Mutators
 
     public function setPasswordAttribute($password)
     {
