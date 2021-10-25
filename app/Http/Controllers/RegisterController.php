@@ -14,7 +14,6 @@ class RegisterController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        // $attributes['password']=bcrypt($attributes['password']);
         $user = User::create($request->validated());
         auth()->login($user);
         return redirect('/')->with('success', __('messages.account-created'));

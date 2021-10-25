@@ -59,14 +59,17 @@
                 </div>
 
                 <section class="col-start-5 col-span-8 mt-10 space-y-6">
-                    <x-post-comment />
-                    <x-post-comment />
-                    <x-post-comment />
+                    @auth()
+                        <x-comment.comment-form :post="$post"/>
+                    @endauth
+
+
+                    @foreach($post->comments as $comment)
+                    <x-post-comment :comment="$comment"/>
+                    @endforeach
                 </section>
             </article>
         </main>
-
-        </section>
     </x-slot>
 
 </x-layout>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
@@ -22,6 +23,8 @@ Route::get('/login', [SessionController::class, 'create'])->middleware('guest');
 Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth");
 
 Route::post('/session', [SessionController::class, 'store'])->middleware("guest");
+
+Route::post('/posts/{post}/comments', [PostCommentController::class, 'store'])->middleware("auth");
 
 
 //Route::get('/authors', function () {

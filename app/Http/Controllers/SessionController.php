@@ -13,7 +13,7 @@ class SessionController extends Controller
     {
         $user = auth()->user()->username;
         auth()->logout();
-        return redirect('/')->with('success', 'Goodbye ' . $user);
+        return back()->with('success', 'Goodbye ' . $user);
     }
 
     public function create()
