@@ -1,13 +1,17 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionController;
 use App\Models\User;
+use App\Services\Newsletter;
 use Illuminate\Support\Facades\Route;
 use \App\Models\Post;
 use \App\Models\Category;
+use Illuminate\Validation\ValidationException;
+use MailchimpMarketing\ApiClient;
 
 
 Route::get('/', [PostController::class, 'index'])->name('home');
@@ -25,6 +29,26 @@ Route::post('/logout', [SessionController::class, 'destroy'])->middleware("auth"
 Route::post('/session', [SessionController::class, 'store'])->middleware("guest");
 
 Route::post('/posts/{post}/comments', [PostCommentController::class, 'store'])->middleware("auth");
+
+Route::post('/newsletter', NewsletterController::class);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //Route::get('/authors', function () {
