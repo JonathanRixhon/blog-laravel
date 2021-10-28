@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class PostController extends Controller
 {
@@ -26,5 +27,9 @@ class PostController extends Controller
     {
         $post->load('category','author','comments');
         return view('posts.show', compact(['post']));
+    }
+  public function create(Post $post)
+    {
+        return view('posts.create');
     }
 }
