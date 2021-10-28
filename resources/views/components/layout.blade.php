@@ -32,6 +32,7 @@
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
 
                     <a href="/login" class="text-xs font-bold uppercase">Login</a>
+
                 </p>
 
             @endguest

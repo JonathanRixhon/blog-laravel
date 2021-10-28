@@ -33,7 +33,7 @@ Route::post('/posts/{post}/comments', [PostCommentController::class, 'store'])->
 Route::post('/newsletter', NewsletterController::class);//TODO: BUG LORS DE L'ENCOIS DE MAIL
 
 
-Route::get('admin/posts/create', [PostController::class,'create'])->middleware('éé');
+Route::get('admin/posts/create', [PostController::class,'create'])->middleware('admin');
 
 
 
