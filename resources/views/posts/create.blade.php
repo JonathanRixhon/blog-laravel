@@ -3,21 +3,76 @@
         <x-slot name="mainContent">
             <main>
                 <x-panel class="max-w-sm mx-auto">
-                    <form action="/admin/posts" method="POST">
+                    <h1 class="text-center font-bold text-xl">
+                        New Post
+                    </h1>
+                    <form action="/admin/posts" enctype="multipart/form-data" method="POST" x-data="{
+                        titleValue:$refs.title.value,
+                        slugValue:'',
+                        slugify(text){
+                            return text.toString()
+                            .toLowerCase()
+                            .replace(/\s+/g, '-')
+                            .replace(/[^\w\-]+/g, '')
+                            .replace(/\-\-+/g, '-')
+                            .replace(/^-+/, '')
+                            .replace(/-+$/, '');
+                        },
+                        changeValue(){
+                           this.slugValue = this.slugify(this.titleValue)
+                        }
+                    }">
                         @csrf
-                        <h1 class="text-center font-bold text-xl">
-                            New Post
-                        </h1>
+
 
                         <div class="mb-6">
-
                             <label for="title" value="{{old('title')}}" class="block mb-2 uppercase font-bold text-xs
                             text-gray-700">
                                 Title
                             </label>
-                            <input value="{{old('title')}}" class="border rounded border-gray-400 p-2 w-full"
-                                   type="text"
-                                   id="title" name="title"/>
+                            <input
+                                x-model="titleValue"
+                                @input="changeValue()"
+                                x-ref="title"
+                                value="{{old('title')}}"
+                                class="border rounded border-gray-400 p-2 w-full"
+                                type="text"
+                                id="title"
+                                name="title"/>
+
+                            <x-error-message field="title"/>
+
+                        </div>
+
+                        <div class="mb-6">
+                            <label
+                                for="slug"
+                                class="block mb-2 uppercase font-bold text-xs text-gray-700">
+                                Slug
+                            </label>
+                            <input
+                                type="text"
+                                class="border rounded border-gray-400 p-2 w-full"
+                                id="slug"
+                                name="slug"
+                                x-ref="slug"
+
+                                x-bind:value="slugValue">
+                            <x-error-message field="slug"/>
+                        </div>
+
+
+                        <div class="mb-6">
+                            <label for="thumbnail" value="{{old('title')}}" class="block mb-2 uppercase font-bold
+                            text-xs
+                            text-gray-700">
+                                Thumbnail
+                            </label>
+                            <input
+                                class="border rounded border-gray-400 p-2 w-full"
+                                type="file"
+                                id="thumbnail"
+                                name="thumbnail"/>
 
                             <x-error-message field="title"/>
 
@@ -39,6 +94,7 @@
                             </select>
                             <x-error-message field="category"/>
                         </div>
+
 
                         <div class="mb-6">
                             <label for="excerpt" class="block mb-2 uppercase font-bold text-xs text-gray-700">

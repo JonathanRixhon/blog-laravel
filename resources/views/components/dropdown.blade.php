@@ -1,5 +1,5 @@
 @props(['trigger','entries'])
-<div x-data="{show:false}">
+<div x-data="{show:false}" class="relative">
     {{-- Trigger --}}
     <div @click="show=!show">
         {{$trigger}}

@@ -4,7 +4,8 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="//unpkg.com/alpinejs" defer></script>
+{{--<script src="//unpkg.com/alpinejs" defer></script>--}}
+<script src="{{asset('js/app.js')}}"></script>
 <style>
     html {
         scroll-behavior: smooth;
@@ -22,19 +23,34 @@
         <div class="mt-8 md:mt-0 flex items-center">
 
             @auth()
-                <p class="text-xs font-bold uppercase">Welcome <b>{{auth()->user()->name}}</b></p>
-                <form action="/logout" method="POST" class="ml-4 p-0 leading-none">
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        <button class="text-xs font-bold uppercase">Welcome <b>{{auth()->user()->name}}</b></button>
+                    </x-slot>
+                    <x-slot name="entries">
+                        <x-dropdown-item href="/admin/posts/create">
+                            New Post
+                        </x-dropdown-item>
+
+                        <x-dropdown-item href="#" @click.prevent="document.querySelector('#logoutform').submit()">
+                            Log out
+                        </x-dropdown-item>
+                    </x-slot>
+                </x-dropdown>
+
+                <form action="/logout" method="POST" id="logoutform" class="ml-4 p-0 leading-none">
                     @csrf
-                    <button type="submit" class="text-xs font-bold uppercase p-0 ">Logout</button>
                 </form>
+
+
             @else
+
+
+
                 <p>
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
-
                     <a href="/login" class="text-xs font-bold uppercase">Login</a>
-
                 </p>
-
             @endguest
             <a href="#newsletter"
                class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
