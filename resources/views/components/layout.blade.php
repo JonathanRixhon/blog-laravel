@@ -32,6 +32,12 @@
                             New Post
                         </x-dropdown-item>
 
+                        @can('admin')
+                        <x-dropdown-item href="#">
+                            Dashboard
+                        </x-dropdown-item>
+                        @endcan
+
                         <x-dropdown-item href="#" @click.prevent="document.querySelector('#logoutform').submit()">
                             Log out
                         </x-dropdown-item>
