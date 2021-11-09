@@ -2,40 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class PostController extends Controller
+class AdminPostController extends Controller
 {
     public function index()
     {
-        $page_title = "My Blog";
+        return view('admin.posts.index', [
+            'posts' => Post::paginate(50),
 
-
-        return view('posts.index', [
-            "posts" => Post::latest()->filter(request(['search', 'category', 'author']))->simplePaginate(6)->withQueryString(),
-            "page_title" => $page_title,
-            "categories" => Category::whereHas('posts')->orderBy('name')->get(),
-            "authors" => User::whereHas('posts')->orderBy('name')->get(),
-            "thumbnail" => "image"
         ]);
-    }
-
-    public function show(Post $post)
-    {
-        $post->load('category', 'author', 'comments');
-        return view('posts.show', compact(['post']));
     }
 
     public function create(Post $post)
     {
         return view('admin.posts.create');
     }
+
 
     public function store()
     {
@@ -60,4 +45,36 @@ class PostController extends Controller
         $post = Post::create($attributes);
         return redirect('/posts/' . $post->slug)->with('success', "Post as been created and published");
     }
+
+    public function edit(Post $post)
+    {
+        return view('admin.posts.edit', ['post' => $post]);
+    }
+
+    public function update(Post $post)
+    {
+        $attributes = request()->validate([
+            'title' => 'required|max:255',
+            'thumbnail' => 'required|image',
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
+        if (isset($attributes['thumbnail']))
+        {
+            unset($attributes['thumbnail']);
+            $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('thumbnails');
+        }
+
+        $post->update($attributes);
+        return back()->with('success', 'Post Updated!');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return back()->with('success', 'Post Deleted!');
+    }
+
 }

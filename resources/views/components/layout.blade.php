@@ -33,7 +33,7 @@
                         </x-dropdown-item>
 
                         @can('admin')
-                        <x-dropdown-item href="#">
+                        <x-dropdown-item href="/admin/posts">
                             Dashboard
                         </x-dropdown-item>
                         @endcan
