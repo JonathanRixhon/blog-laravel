@@ -32,11 +32,11 @@
                             New Post
                         </x-dropdown-item>
 
-                        @can('admin')
-                        <x-dropdown-item href="/admin/posts">
-                            Dashboard
-                        </x-dropdown-item>
-                        @endcan
+                        @admin
+                            <x-dropdown-item href="/admin/posts">
+                                Dashboard
+                            </x-dropdown-item>
+                        @endadmin
 
                         <x-dropdown-item href="#" @click.prevent="document.querySelector('#logoutform').submit()">
                             Log out

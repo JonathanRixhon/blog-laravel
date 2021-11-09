@@ -32,6 +32,15 @@ use
  * @property int $category_id
  * @property-read \App\Models\Category $category
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCategoryId($value)
+ * @property int $user_id
+ * @property string|null $thumbnail_path
+ * @property-read \App\Models\User $author
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Comment[] $comments
+ * @property-read int|null $comments_count
+ * @method static \Database\Factories\PostFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post filter(array $filters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereThumbnailPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUserId($value)
  */
 class Post extends Model
 {

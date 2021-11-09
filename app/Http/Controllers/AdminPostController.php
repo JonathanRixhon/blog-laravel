@@ -24,9 +24,7 @@ class AdminPostController extends Controller
 
     public function store()
     {
-        $post = new Post();
-
-        $attributes = $this->validatePost($post);
+        $attributes = $this->validatePost();
 
         $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('thumbnails');
 
@@ -49,8 +47,7 @@ class AdminPostController extends Controller
     {
         $attributes = $this->validatePost($post);
 
-
-        if (isset($attributes['thumbnail']))
+        if ($attributes['thumbnail'] ?? false)
         {
             unset($attributes['thumbnail']);
             $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('thumbnails');
@@ -70,8 +67,10 @@ class AdminPostController extends Controller
      * @param Post $post
      * @return array
      */
-    public function validatePost(Post $post): array
+    protected function validatePost(?Post $post = null): array
     {
+
+        $post ??= new Post();
         return request()->validate([
             'title' => 'required|max:255',
             'thumbnail' => $post->exists ? ['image'] : ['required|image'],
