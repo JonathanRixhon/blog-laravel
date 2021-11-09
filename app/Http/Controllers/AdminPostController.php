@@ -24,21 +24,15 @@ class AdminPostController extends Controller
 
     public function store()
     {
+        $post = new Post();
 
-        $attributes = request()->validate([
-            'title' => 'required|max:255',
-            'excerpt' => 'required',
-            'body' => 'required',
-            'thumbnail' => 'required|image',
-            'slug' => ['required', Rule::unique('posts', 'slug')],
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
-
+        $attributes = $this->validatePost($post);
 
         $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('thumbnails');
+
         unset($attributes['thumbnail']);
+
         $attributes['user_id'] = auth()->id();
-        //$attributes['slug']=Str::slug($attributes['title']);
         $attributes['published_at'] = now('Europe/Brussels');
 
 
@@ -53,14 +47,9 @@ class AdminPostController extends Controller
 
     public function update(Post $post)
     {
-        $attributes = request()->validate([
-            'title' => 'required|max:255',
-            'thumbnail' => 'required|image',
-            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post->id)],
-            'excerpt' => 'required',
-            'body' => 'required',
-            'category_id' => ['required', Rule::exists('categories', 'id')],
-        ]);
+        $attributes = $this->validatePost($post);
+
+
         if (isset($attributes['thumbnail']))
         {
             unset($attributes['thumbnail']);
@@ -75,6 +64,22 @@ class AdminPostController extends Controller
     {
         $post->delete();
         return back()->with('success', 'Post Deleted!');
+    }
+
+    /**
+     * @param Post $post
+     * @return array
+     */
+    public function validatePost(Post $post): array
+    {
+        return request()->validate([
+            'title' => 'required|max:255',
+            'thumbnail' => $post->exists ? ['image'] : ['required|image'],
+            'slug' => ['required', Rule::unique('posts', 'slug')->ignore($post)],
+            'excerpt' => 'required',
+            'body' => 'required',
+            'category_id' => ['required', Rule::exists('categories', 'id')],
+        ]);
     }
 
 }
