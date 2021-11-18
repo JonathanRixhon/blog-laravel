@@ -46,7 +46,8 @@ Route::middleware('can:admin')->group(function ()
     Route::get('/admin/posts', [AdminPostController::class, 'index']);
     */
 });
-
+//Envois d'email qu'on déplace su controller quand on fait un nv commentaire
+//
 
 
 
