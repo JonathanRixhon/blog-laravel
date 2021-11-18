@@ -97,4 +97,10 @@ class User extends Authenticatable
     {
         $this->attributes['password']=bcrypt($password);
     }
+
+    //Notification
+    public function routeNotificationForSlack($notification)
+    {
+        return 'https://hooks.slack.com/services/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';
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event\CommentPosted;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\Comment;
 use App\Models\Post;
@@ -24,8 +25,13 @@ class PostCommentController extends Controller
 
         $post->comments()->create($attributes);
 
+        //CommentPosted::dispatch($attributes);
+        $user=User::firstWhere('id',auth()->id());
+        $user->notify(new \App\Notifications\CommentPosted($attributes));
+
         return back()->with('success', "Comment posted!");
     }
+
 }
 
 
