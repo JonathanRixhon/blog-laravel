@@ -51,12 +51,11 @@
 
             @else
 
-
-
                 <p>
                     <a href="/register" class="text-xs font-bold uppercase">Register</a>
                     <a href="/login" class="text-xs font-bold uppercase">Login</a>
                 </p>
+
             @endguest
             <a href="#newsletter"
                class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">

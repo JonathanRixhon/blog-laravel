@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use
     Illuminate\Database\Eloquent\Model;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * App\Models\Post
@@ -66,9 +67,13 @@ class Post extends Model
                 ->where('username', $author)
             )
         );
-
-
     }
+
+    #[Pure] public function hasComments(): bool
+    {
+        return (bool)$this->comments->count();
+    }
+
 
     protected $dates = [
         "published_at"
@@ -85,7 +90,9 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
 
     }
-    public function comments(){
+
+    public function comments()
+    {
         return $this->hasMany(Comment::class);
     }
 }

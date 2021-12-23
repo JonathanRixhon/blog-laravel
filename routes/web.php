@@ -33,6 +33,8 @@ Route::post('/posts/{post}/comments', [PostCommentController::class, 'store'])->
 
 Route::post('/newsletter', NewsletterController::class);
 
+Route::get('/hello', fn()=>"Hello");
+
 //ADMIN
 Route::middleware('can:admin')->group(function ()
 {
