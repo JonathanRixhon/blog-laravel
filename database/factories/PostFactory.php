@@ -31,9 +31,9 @@ class PostFactory extends Factory
             'body' => '<p>' . implode('</p><p>', $this->faker->paragraphs(4)) . "</p>",
             'excerpt' => '<p>' . implode('</p><p>', $this->faker->paragraphs(3)) . "</p>",
             'published_at' => $this->faker->dateTime,
-            //'user_id' => User::where('id', random_int(1, 4))->first(),
-            'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'user_id' => User::where('id', random_int(1, 4))->first(),
+//            'user_id' => User::factory(),
+            'category_id' => Category::where('id', random_int(1, $categoryRand))->first(),
         ];
 
 //        if (random_int(0, 100) > 98) {

@@ -25,7 +25,7 @@ class PostCommentController extends Controller
 
         $post->comments()->create($attributes);
 
-        //CommentPosted::dispatch($attributes);
+//        CommentPosted::dispatch($attributes);
         $user=User::firstWhere('id',auth()->id());
         $user->notify(new \App\Notifications\CommentPosted($attributes));
 
