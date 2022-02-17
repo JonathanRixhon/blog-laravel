@@ -21,6 +21,7 @@ class MustBeAdministrator
         {
             abort(Response::HTTP_FORBIDDEN);
         }
+
         return $next($request);
     }
 }

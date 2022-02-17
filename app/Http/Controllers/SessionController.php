@@ -29,7 +29,6 @@ class SessionController extends Controller
             'password' => ['required', 'max:255'],
         ]);
 
-        //$credentials = request()->only('email', 'password');
 
         if (!auth()->attempt($attributes))
         {

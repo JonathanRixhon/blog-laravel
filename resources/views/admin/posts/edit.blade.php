@@ -93,7 +93,6 @@
 
                 </form>
             </x-setting>
-
         </x-slot>
     </section>
 </x-layout>

@@ -50,7 +50,7 @@ class AdminPostController extends Controller
         if ($attributes['thumbnail'] ?? false)
         {
             unset($attributes['thumbnail']);
-            $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('thumbnails');
+            $attributes['thumbnail_path'] = request()->file('thumbnail')?->store('associations/thumbnails');
         }
 
         $post->update($attributes);
