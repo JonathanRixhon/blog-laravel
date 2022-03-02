@@ -25,7 +25,6 @@ class CategoryFactory extends Factory
         $data=[
             'name' => $this->faker->unique()->word(),
             //'slug' => $THIS->faker->slug(),
-
         ];
 
        $data['slug']=Str::slug($data['name']);
